@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ShipMove : MonoBehaviour
 {
@@ -158,7 +159,7 @@ public class ShipMove : MonoBehaviour
 
         if (hp <= 0)
         {
-            Debug.Log("destroy");
+            SceneManager.LoadScene("EndScene");
         }
 
         Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);

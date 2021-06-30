@@ -10,7 +10,9 @@ public class ScoreManager : MonoBehaviour
     public Text enemyt;
     public Text timet;
 
-    private float time = 12f;
+    public Button shopButton;
+
+    public float time = 12f;
 
     public int gearValue = 0;
     public int enemyValue = 0;
@@ -37,13 +39,16 @@ public class ScoreManager : MonoBehaviour
         if(enemyValue <= 0)
         {
             timet.gameObject.SetActive(true);
+            shopButton.interactable = true;
             time -= Time.deltaTime;
 
-            timet.text = "" + time;
+            timet.text = "" + time.ToString("N2");
             if(time <= 0)
             {
                 timet.gameObject.SetActive(false);
+                shopButton.interactable = false;
                 time = 12f;
+                spawn.stageEnemy += 2;
                 spawn.maxEnemy = spawn.stageEnemy;
             }
         }

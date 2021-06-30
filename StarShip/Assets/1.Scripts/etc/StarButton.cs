@@ -10,11 +10,13 @@ public class StarButton : MonoBehaviour
     public GameObject startButton;
     public GameObject HTPButton;
     public GameObject HTPPanel;
+    public GameObject HTPPanel2;
     public GameObject Fade;
 
     public Image fade;
 
     public float PanelY;
+    public float PanelX;
 
     private bool fadeTime;
     public float time;
@@ -52,6 +54,14 @@ public class StarButton : MonoBehaviour
         HTPButton.transform.DOMoveY(-50, 1);
         HTPPanel.transform.DOMoveY(PanelY, 1);
 
+    }
+    public void BeforEx()
+    {
+        HTPPanel.transform.DOMoveX(PanelX, 1);
+    }
+    public void NextEx()
+    {
+        HTPPanel.transform.DOMoveX(-PanelX,1);
     }
 
     public void Back()

@@ -30,6 +30,10 @@ public class UpgradeSystem : MonoBehaviour
         ship = FindObjectOfType<ShipMove>();
         score = FindObjectOfType<ScoreManager>();
     }
+    public void Update()
+    {
+
+    }
 
     public void Repair()
     {
