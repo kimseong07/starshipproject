@@ -41,6 +41,9 @@ public class EnemyHealth : MonoBehaviour
 
     private ObjectManager objectManager;
 
+    Spawner spawn;
+    DataController dataController;
+
     public bool isDie;
 
     private void Start()
@@ -49,6 +52,8 @@ public class EnemyHealth : MonoBehaviour
         gear = new string[] { "Gear" };
         player = FindObjectOfType<ShipMove>();
         repShip = FindObjectOfType<RepairShip>();
+        spawn = FindObjectOfType<Spawner>();
+        dataController = FindObjectOfType<DataController>();
 
         rbody = GetComponent<Rigidbody2D>();
         box = GetComponent<BoxCollider2D>();
@@ -135,8 +140,10 @@ public class EnemyHealth : MonoBehaviour
 
     void EnemyDie()
     {
-        FindObjectOfType<Spawner>().enemyCount--;
-        FindObjectOfType<Spawner>().maxEnemy--;
+        spawn.enemyCount--;
+        spawn.maxEnemy--;
+
+        dataController.gameData._enemyValue = spawn.maxEnemy;
 
         hp = maxHp;
 

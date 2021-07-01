@@ -35,7 +35,6 @@ public class Spawner : MonoBehaviour
 
         enemyCount = (int)GameObject.FindGameObjectsWithTag("Enemy").Length;
 
-        dataController.gameData._enemyValue = maxEnemy;
         if (spawnPoints.Length > 0)
         {
             if (enemyCount < maxEnemy)

@@ -106,6 +106,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 3270}
     - Class: 114
       Script: {instanceID: 3386}
+    - Class: 114
+      Script: {instanceID: 5140}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -224,9 +226,9 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 5088}
     - Class: 114
-      Script: {instanceID: 5512}
+      Script: {instanceID: 5140}
     - Class: 114
-      Script: {instanceID: 20348}
+      Script: {instanceID: 5516}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -1445,6 +1447,12 @@ ScriptsOnlyBuild:
     className: SoftEffectsFont
   - hash:
       serializedVersion: 2
+      Hash: e34df8e79955147ebbd96c8080c32a2c
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: DataController
+  - hash:
+      serializedVersion: 2
       Hash: 32fce7b97c39bff4b4f6c0f53f7e6bf1
     assemblyName: Cinemachine.dll
     namespaceName: Cinemachine
@@ -1533,12 +1541,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.2D.IK.Runtime.dll
     namespaceName: UnityEngine.U2D.IK
     className: FabrikSolver2D
-  - hash:
-      serializedVersion: 2
-      Hash: e34df8e79955147ebbd96c8080c32a2c
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: DataController
   platform: 5
   scenePathNames:
   - Assets/Scenes/StartScene.unity

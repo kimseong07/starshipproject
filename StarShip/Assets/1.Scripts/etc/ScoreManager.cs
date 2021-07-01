@@ -50,6 +50,7 @@ public class ScoreManager : MonoBehaviour
                 time = 12f;
                 spawn.stageEnemy += 2;
                 spawn.maxEnemy = spawn.stageEnemy;
+                dataController.gameData._enemyValue = spawn.maxEnemy;
             }
         }
     }

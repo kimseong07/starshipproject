@@ -30,6 +30,7 @@ public class UpgradeSystem : MonoBehaviour
     public bool tripleCan = false;
     public bool tur = false;
     public bool doubleTur = false;
+
     void Start()
     {
         dataController = FindObjectOfType<DataController>();
@@ -45,14 +46,15 @@ public class UpgradeSystem : MonoBehaviour
     }
     public void Update()
     {
-        if (doubleCan)
+        if (doubleCan == true)
         {
             cannon.SetActive(true);
             cannonButton.gameObject.SetActive(false);
 
             dataController.gameData._doublecan = doubleCan;
         }
-        else if (tripleCan)
+
+        if (tripleCan == true)
         {
             ba_se.SetActive(true);
 
@@ -60,14 +62,16 @@ public class UpgradeSystem : MonoBehaviour
 
             dataController.gameData._trippleCan = tripleCan;
         }
-        else if (tur)
+
+        if (tur == true)
         {
             turretObject.SetActive(true);
             turretButton.gameObject.SetActive(false);
 
             dataController.gameData._tur = tur;
         }
-        else if (doubleTur)
+
+        if (doubleTur == true)
         {
             turretObject2.SetActive(true);
 
@@ -79,6 +83,8 @@ public class UpgradeSystem : MonoBehaviour
 
     public void Repair()
     {
+        dataController.gameData._gearValue = score.gearValue;
+
         if (score.gearValue < 1)
         {
             Debug.Log("기어가 부족합니다");
@@ -96,6 +102,8 @@ public class UpgradeSystem : MonoBehaviour
 
     public void Duraility()
     {
+        dataController.gameData._gearValue = score.gearValue;
+
         if (score.gearValue < needGear)
         {
             Debug.Log("기어가 부족합니다");
@@ -115,6 +123,8 @@ public class UpgradeSystem : MonoBehaviour
 
     public void Fire()
     {
+        dataController.gameData._gearValue = score.gearValue;
+
         if (score.gearValue < needGearFire)
         {
             Debug.Log("기어가 부족합니다");
@@ -138,6 +148,8 @@ public class UpgradeSystem : MonoBehaviour
 
     public void doubleCannon()
     {
+        dataController.gameData._gearValue = score.gearValue;
+
         if (score.gearValue < 20)
         {
             Debug.Log("기어가 부족합니다");
@@ -145,11 +157,14 @@ public class UpgradeSystem : MonoBehaviour
         else if (score.gearValue >= 20)
         {
             score.gearValue -= 20;
+
             doubleCan = true;
         }
     }
     public void trippleCannnon()
     {
+        dataController.gameData._gearValue = score.gearValue;
+
         if (score.gearValue < 30)
         {
             Debug.Log("기어가 부족합니다");
@@ -164,6 +179,8 @@ public class UpgradeSystem : MonoBehaviour
 
     public void turret()
     {
+        dataController.gameData._gearValue = score.gearValue;
+
         if (score.gearValue < 30)
         {
             Debug.Log("기어가 부족합니다");
@@ -177,6 +194,8 @@ public class UpgradeSystem : MonoBehaviour
     }
     public void doubleTurret()
     {
+        dataController.gameData._gearValue = score.gearValue;
+
         if (score.gearValue < 30)
         {
             Debug.Log("기어가 부족합니다");
@@ -184,6 +203,7 @@ public class UpgradeSystem : MonoBehaviour
         else if (score.gearValue >= 30)
         {
             score.gearValue -= 30;
+
             doubleTur = true;
         }
     }

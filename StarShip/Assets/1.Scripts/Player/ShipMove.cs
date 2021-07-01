@@ -62,6 +62,26 @@ public class ShipMove : MonoBehaviour
 
         if (hp <= 0)
         {
+            dataController.gameData._maxhp = 100;
+            dataController.gameData._hp = 100;
+
+            dataController.gameData._gearValue = 100;
+
+            dataController.gameData._enemyValue = 10;
+
+            dataController.gameData._needGear = 1;
+            dataController.gameData._needGearFire = 1;
+
+            dataController.gameData._cdelay = 0.5f;
+            dataController.gameData._repairHp = 100;
+
+            dataController.gameData._doublecan = false;
+            dataController.gameData._trippleCan = false;
+            dataController.gameData._tur = false;
+            dataController.gameData._doubleTur = false;
+
+            dataController.SaveGameData();
+
             SceneManager.LoadScene("EndScene");
         }
 
