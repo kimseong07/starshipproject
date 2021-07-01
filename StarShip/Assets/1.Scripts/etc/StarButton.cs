@@ -44,31 +44,31 @@ public class StarButton : MonoBehaviour
 
     public void NextScene()
     {
-        Fade.transform.position = new Vector2(640,360);
+        Fade.transform.position = new Vector2(700,320);
         fadeTime = true;
     }
 
     public void HowToPlay()
     {
-        startButton.transform.DOMoveY(-50, 1);
-        HTPButton.transform.DOMoveY(-50, 1);
-        HTPPanel.transform.DOMoveY(PanelY, 1);
+        startButton.transform.DOLocalMoveY(-550, 1);
+        HTPButton.transform.DOLocalMoveY(-550, 1);
+        HTPPanel.transform.DOLocalMoveY(PanelY, 1);
 
     }
     public void BeforEx()
     {
-        HTPPanel.transform.DOMoveX(PanelX, 1);
+        HTPPanel.transform.DOLocalMoveX(0, 1);
     }
     public void NextEx()
     {
-        HTPPanel.transform.DOMoveX(-PanelX,1);
+        HTPPanel.transform.DOLocalMoveX(-1290,1);
     }
 
     public void Back()
     {
-        startButton.transform.DOMoveY(250, 1);
-        HTPButton.transform.DOMoveY(130, 1);
-        HTPPanel.transform.DOMoveY(-PanelY, 1);
+        startButton.transform.DOLocalMoveY(-150, 1);
+        HTPButton.transform.DOLocalMoveY(-250, 1);
+        HTPPanel.transform.DOLocalMoveY(-1080, 1);
     }
 
 }
