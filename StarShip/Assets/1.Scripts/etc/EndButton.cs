@@ -7,18 +7,6 @@ using UnityEngine.SceneManagement;
 
 public class EndButton : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void Retry()
     {
         SceneManager.LoadScene("MainScene");
@@ -26,6 +14,6 @@ public class EndButton : MonoBehaviour
 
     public void End()
     {
-        
+        Application.Quit();
     }
 }

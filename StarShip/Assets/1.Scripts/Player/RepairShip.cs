@@ -21,6 +21,8 @@ public class RepairShip : MonoBehaviour
 
     public GameObject canvas;
 
+    public GameObject pausePanel;
+
     public Transform pop;
 
     public Transform upgradePop;
@@ -29,12 +31,16 @@ public class RepairShip : MonoBehaviour
 
     ShipMove ship;
 
+    private bool gamePause;
+
     private void Start()
     {
         ship = FindObjectOfType<ShipMove>();
 
         seq1.Append(pop.DOLocalMoveX(960, 1f));
         seq3.Append(upgradePop.DOLocalMoveX(960, 1f));
+
+        gamePause = false;
     }
 
     void Update()
@@ -45,6 +51,19 @@ public class RepairShip : MonoBehaviour
         if(hp <= 0)
         {
             Destroy(this.gameObject);
+        }
+
+        if(gamePause)
+        {
+            Time.timeScale = 0;
+            gamePause = true;
+            return;
+        }
+        else if(!gamePause)
+        {
+            Time.timeScale = 1;
+            gamePause = false;
+            return;
         }
     }
 
@@ -163,6 +182,18 @@ public class RepairShip : MonoBehaviour
         seq3.AppendCallback(() => { upgradePop.gameObject.SetActive(false); });
 
         StartCoroutine("OpenPop");
+    }
+
+    public void Pause()
+    {
+        gamePause = true;
+        pausePanel.SetActive(true);
+    }
+
+    public void Play()
+    {
+        gamePause = false;
+        pausePanel.SetActive(false);
     }
 
     IEnumerator OpenUpgrade()
