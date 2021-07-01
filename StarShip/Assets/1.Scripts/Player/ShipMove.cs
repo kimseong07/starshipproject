@@ -170,7 +170,7 @@ public class ShipMove : MonoBehaviour
             mousePos = hit.point;
         }
 
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKey(KeyCode.Space))
         {
             rb.velocity *= 0;
         }
