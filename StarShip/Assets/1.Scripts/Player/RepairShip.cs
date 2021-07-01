@@ -31,14 +31,19 @@ public class RepairShip : MonoBehaviour
 
     ShipMove ship;
 
+    DataController dataController;
+
     private bool gamePause;
 
     private void Start()
     {
         ship = FindObjectOfType<ShipMove>();
+        dataController = FindObjectOfType<DataController>();
 
         seq1.Append(pop.DOLocalMoveX(960, 1f));
         seq3.Append(upgradePop.DOLocalMoveX(960, 1f));
+
+        hp = dataController.gameData._repairHp;
 
         gamePause = false;
     }
@@ -50,7 +55,7 @@ public class RepairShip : MonoBehaviour
 
         if(hp <= 0)
         {
-            Destroy(this.gameObject);
+            this.gameObject.SetActive(false);
         }
 
         if(gamePause)
@@ -121,29 +126,14 @@ public class RepairShip : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        /*
-        if (collision.gameObject.tag == "Player")
-        {
-            DOTween.To(() => cvCam.m_Lens.OrthographicSize, value => cvCam.m_Lens.OrthographicSize = value, 1f, 1f);
-            DOTween.To(() => cCm.m_Offset.x, value => cCm.m_Offset.x = value, 1f, 1f);
-
-            OpenPopup();
-        }
-        */
         if (collision.gameObject.tag == "EnemyBullet")
         {
             Bullet bullet = collision.GetComponent<Bullet>();
             hp -= bullet.damage;
 
             collision.gameObject.SetActive(false);
-        }
-    }
 
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            //followCam.transform.localRotation = player.transform.localRotation;
+            dataController.gameData._repairHp = hp;
         }
     }
 
@@ -190,6 +180,10 @@ public class RepairShip : MonoBehaviour
         pausePanel.SetActive(true);
     }
 
+    public void End()
+    {
+        Application.Quit();
+    }
     public void Play()
     {
         gamePause = false;

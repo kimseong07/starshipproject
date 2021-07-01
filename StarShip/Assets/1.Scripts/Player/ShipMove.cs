@@ -25,7 +25,7 @@ public class ShipMove : MonoBehaviour
 
     public bool isShop;
 
-    //Vector2 movement = new Vector2();
+    DataController dataController;
 
     public Vector3 mousePos { get; private set; }
 
@@ -33,127 +33,30 @@ public class ShipMove : MonoBehaviour
     {
         score = FindObjectOfType<ScoreManager>();
         rb = GetComponent<Rigidbody2D>();
+        dataController = FindObjectOfType<DataController>();
 
         isShop = false;
 
-        hp = maxhp; 
+        maxhp = dataController.gameData._maxhp;
+        hp = dataController.gameData._hp;
+        score.gearValue = dataController.gameData._gearValue;
 
         hpbar.value = hp / maxhp;
     }
 
     private void FixedUpdate()
     {
-        /*
-        float horizon = Input.GetAxis("Horizontal");
-
-        rotateAmount = -Input.GetAxis("Horizontal");
-
-        if(rb.rotation <= 90 && rb.rotation > 0)
-        {
-            movement.x = horizon;
-            movement.y = horizon;
-        }
-        else if(rb.rotation <= 180 && rb.rotation > 0)
-        {
-            movement.x = -horizon;
-            movement.y = horizon;
-        }
-        else if(rb.rotation <= 0 && rb.rotation >= -90)
-        {
-            movement.x = horizon;
-            movement.y = -horizon;
-        } 
-        else if(rb.rotation <= 0 && rb.rotation >= -180)
-        {
-            movement.x = -horizon;
-            movement.y = -horizon;
-        }
-        else if(rb.rotation > 180)
-        {
-            rb.rotation = -180;
-        }
-        else if (rb.rotation < -180)
-        {
-            rb.rotation = 180;
-        }
-
-        if(gameObject.transform.localPosition.y > 5)
-        {
-            Vector2 vec = gameObject.transform.localPosition;
-            vec.y = 5;
-            gameObject.transform.localPosition = vec;
-            if(gameObject.transform.localPosition.y <= 5)
-            {
-                Vector2 vecx = gameObject.transform.localPosition;
-                vecx.x = 0;
-                gameObject.transform.localPosition = vecx;
-            }
-        }
-        else if (gameObject.transform.localPosition.y < -5)
-        {
-            Vector2 vec = gameObject.transform.localPosition;
-            vec.y = -5;
-            gameObject.transform.localPosition = vec;
-            if (gameObject.transform.localPosition.y >= -5)
-            {
-                Vector2 vecx = gameObject.transform.localPosition;
-                vecx.x = 0;
-                gameObject.transform.localPosition = vecx;
-            }
-        }
-
-        else if(gameObject.transform.localPosition.x > 5)
-        {
-            Vector2 vec = gameObject.transform.localPosition;
-            vec.x = 5;
-            gameObject.transform.localPosition = vec;
-            if (gameObject.transform.localPosition.x <= 5)
-            {
-                Vector2 vecx = gameObject.transform.localPosition;
-                vecx.y = 0;
-                gameObject.transform.localPosition = vecx;
-            }
-        }
-        else if (gameObject.transform.localPosition.x < -5)
-        {
-            Vector2 vec = gameObject.transform.localPosition;
-            vec.x = -5;
-            gameObject.transform.localPosition = vec;
-            if (gameObject.transform.localPosition.x >= -5)
-            {
-                Vector2 vecx = gameObject.transform.localPosition;
-                vecx.y = 0;
-                gameObject.transform.localPosition = vecx;
-            }
-        }
-        if (isShop == false)
-        {
-            rb.rotation += rotateAmount * rotatePower;
-
-            rb.velocity = movement * speed;
-        }
-        */
-
-        //rotateAmount = -Input.GetAxis("Horizontal");
-
-        
         if (isShop == false)
         {
             speed = Input.GetAxis("Vertical") * accelPower;
             Rotate();
         }
-        //direction = Input.GetAxis("Horizontal") * accelPower;
-
-        //direction = Mathf.Sign(Vector2.Dot(rb.velocity, rb.GetRelativeVector(Vector2.up)));
-        rb.rotation += rotateAmount * rotatePower * rb.velocity.magnitude; // * direction;
+        
+        rb.rotation += rotateAmount * rotatePower * rb.velocity.magnitude;
         rb.AddRelativeForce(Vector2.up * speed);
         rb.AddRelativeForce(Vector2.right * direction);
 
         rb.velocity = new Vector2(Mathf.Clamp(rb.velocity.x, -3, 3), Mathf.Clamp(rb.velocity.y, -3, 3));
-        
-        //rb.AddRelativeForce(-Vector2.right * rb.velocity.magnitude * rotateAmount / 2);
-
-        //followCam.transform.localRotation = gameObject.transform.localRotation;
 
         hpbar.value = hp / maxhp;
 
@@ -200,10 +103,16 @@ public class ShipMove : MonoBehaviour
             hp -= bullet.damage;
 
             collision.gameObject.SetActive(false);
+
+            dataController.gameData._hp = hp;
+            dataController.gameData._maxhp = maxhp;
         }
         else if(collision.gameObject.tag == "Gear")
         {
             score.gearValue++;
+
+            dataController.gameData._gearValue = score.gearValue;
+            
             collision.gameObject.SetActive(false);
         }
     }

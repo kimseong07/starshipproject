@@ -6,6 +6,7 @@ ScriptsOnlyBuild:
     - CFX_AutoDestructShuriken
     - CodeMonkey.Assets
     - CodeMonkey.MonoBehaviours.PositionRendererSorter
+    - DataController
     - EndButton
     - EnemyHandler
     - EnemyHealth
@@ -37,6 +38,7 @@ ScriptsOnlyBuild:
     - UnityEditor.U2D.Animation.BoneGizmo
     Unity.2D.IK.Editor.dll:
     - UnityEditor.U2D.IK.IKEditorManager
+    - UnityEditor.U2D.IK.IKGizmos
     Unity.2D.IK.Runtime.dll:
     - UnityEditor.U2D.IK.IKEditorManagerHelper
     Unity.2D.Tilemap.Editor.dll:
@@ -223,6 +225,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 5088}
     - Class: 114
       Script: {instanceID: 5512}
+    - Class: 114
+      Script: {instanceID: 20348}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -661,7 +665,7 @@ ScriptsOnlyBuild:
     className: EnemyHandler
   - hash:
       serializedVersion: 2
-      Hash: 014ac9be6fd7b35c691198b28dd8c705
+      Hash: 63d62019fca27fe0c6167173b92bc77e
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: RepairShip
@@ -1231,7 +1235,7 @@ ScriptsOnlyBuild:
     className: CinemachineGroupComposer
   - hash:
       serializedVersion: 2
-      Hash: 9573ab39b56256e0cee0c957044844b4
+      Hash: 2857cbfccb626c868d00cf3a77cec6a4
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ScoreManager
@@ -1387,7 +1391,7 @@ ScriptsOnlyBuild:
     className: Shooter
   - hash:
       serializedVersion: 2
-      Hash: 39b1af8b761668edecd0dda96bcf8afe
+      Hash: e4a20038b6c2dcc09604ce5e43d6678e
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: UpgradeSystem
@@ -1529,6 +1533,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.2D.IK.Runtime.dll
     namespaceName: UnityEngine.U2D.IK
     className: FabrikSolver2D
+  - hash:
+      serializedVersion: 2
+      Hash: e34df8e79955147ebbd96c8080c32a2c
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: DataController
   platform: 5
   scenePathNames:
   - Assets/Scenes/StartScene.unity

@@ -15,14 +15,16 @@ public class ScoreManager : MonoBehaviour
     public float time = 12f;
 
     public int gearValue = 0;
-    public int enemyValue = 0;
 
     ShipMove ship;
     Spawner spawn;
+
+    DataController dataController;
     void Start()
     {
         ship = FindObjectOfType<ShipMove>();
         spawn = FindObjectOfType<Spawner>();
+        dataController = FindObjectOfType<DataController>();
 
         gear.text = "" + gearValue;
         hp.text = ship.maxhp + " /" + ship.hp;
@@ -30,13 +32,11 @@ public class ScoreManager : MonoBehaviour
 
     void Update()
     {
-        enemyValue = spawn.maxEnemy;
-
         gear.text = "" + gearValue;
         hp.text = ship.maxhp + " /" + ship.hp;
-        enemyt.text = "" + enemyValue;
+        enemyt.text = "" + spawn.maxEnemy;
 
-        if(enemyValue <= 0)
+        if (spawn.maxEnemy <= 0)
         {
             timet.gameObject.SetActive(true);
             shopButton.interactable = true;

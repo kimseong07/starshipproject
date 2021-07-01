@@ -44,7 +44,7 @@ public class StarButton : MonoBehaviour
 
     public void NextScene()
     {
-        Fade.transform.position = new Vector2(700,320);
+        Fade.transform.position = new Vector2(950,550);
         fadeTime = true;
     }
 

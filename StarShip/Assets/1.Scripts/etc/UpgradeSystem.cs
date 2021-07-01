@@ -18,21 +18,63 @@ public class UpgradeSystem : MonoBehaviour
     public Button turretButton;
     public Button nTurretButton;
 
-    RepairShip repair;
     ShipMove ship;
     ScoreManager score;
 
-    private int needGear = 1;
-    private int needGearFire = 1;
+    DataController dataController;
+
+    public int needGear = 1;
+    public int needGearFire = 1;
+
+    public bool doubleCan = false;
+    public bool tripleCan = false;
+    public bool tur = false;
+    public bool doubleTur = false;
     void Start()
     {
-        repair = FindObjectOfType<RepairShip>();
+        dataController = FindObjectOfType<DataController>();
         ship = FindObjectOfType<ShipMove>();
         score = FindObjectOfType<ScoreManager>();
+
+        needGear = dataController.gameData._needGear;
+        needGearFire = dataController.gameData._needGearFire;
+        doubleCan = dataController.gameData._doublecan;
+        tripleCan = dataController.gameData._trippleCan;
+        tur = dataController.gameData._tur;
+        doubleTur = dataController.gameData._doubleTur;
     }
     public void Update()
     {
+        if (doubleCan)
+        {
+            cannon.SetActive(true);
+            cannonButton.gameObject.SetActive(false);
 
+            dataController.gameData._doublecan = doubleCan;
+        }
+        else if (tripleCan)
+        {
+            ba_se.SetActive(true);
+
+            nCanButton.interactable = false;
+
+            dataController.gameData._trippleCan = tripleCan;
+        }
+        else if (tur)
+        {
+            turretObject.SetActive(true);
+            turretButton.gameObject.SetActive(false);
+
+            dataController.gameData._tur = tur;
+        }
+        else if (doubleTur)
+        {
+            turretObject2.SetActive(true);
+
+            nTurretButton.interactable = false;
+
+            dataController.gameData._doubleTur = doubleTur;
+        }
     }
 
     public void Repair()
@@ -41,7 +83,7 @@ public class UpgradeSystem : MonoBehaviour
         {
             Debug.Log("기어가 부족합니다");
         }
-        else if(score.gearValue > 1 && ship.hp >= ship.maxhp)
+        else if (score.gearValue > 1 && ship.hp >= ship.maxhp)
         {
             Debug.Log("hp가 최대치 입니다");
         }
@@ -57,24 +99,28 @@ public class UpgradeSystem : MonoBehaviour
         if (score.gearValue < needGear)
         {
             Debug.Log("기어가 부족합니다");
-        }   
+        }
         else if (score.gearValue > needGear)
         {
             score.gearValue -= needGear;
             ship.maxhp += 10;
             ship.hp = ship.maxhp;
             needGear += 1;
+
+            dataController.gameData._maxhp = ship.maxhp;
+
+            dataController.gameData._needGear = needGear;
         }
     }
 
     public void Fire()
     {
-        if(score.gearValue < needGearFire)
+        if (score.gearValue < needGearFire)
         {
             Debug.Log("기어가 부족합니다");
         }
-        else if(score.gearValue > needGearFire)
-        { 
+        else if (score.gearValue > needGearFire)
+        {
             score.gearValue -= needGearFire;
 
             ba_se.GetComponent<Shooter>().Cdelay -= 0.02f;
@@ -85,6 +131,8 @@ public class UpgradeSystem : MonoBehaviour
             turretObject2.GetComponent<Shooter>().Cdelay -= 0.02f;
 
             needGearFire *= 2;
+
+            dataController.gameData._needGearFire = needGearFire;
         }
     }
 
@@ -97,9 +145,7 @@ public class UpgradeSystem : MonoBehaviour
         else if (score.gearValue >= 20)
         {
             score.gearValue -= 20;
-            //ba_se.SetActive(false);
-            cannon.SetActive(true);
-            cannonButton.gameObject.SetActive(false);
+            doubleCan = true;
         }
     }
     public void trippleCannnon()
@@ -108,12 +154,11 @@ public class UpgradeSystem : MonoBehaviour
         {
             Debug.Log("기어가 부족합니다");
         }
-        else if(score.gearValue >= 30)
+        else if (score.gearValue >= 30)
         {
             score.gearValue -= 30;
-            ba_se.SetActive(true);
 
-            nCanButton.interactable = false;
+            tripleCan = true;
         }
     }
 
@@ -126,9 +171,8 @@ public class UpgradeSystem : MonoBehaviour
         else if (score.gearValue >= 30)
         {
             score.gearValue -= 30;
-            turretObject.SetActive(true);
-            turretButton.gameObject.SetActive(false);
-        
+
+            tur = true;
         }
     }
     public void doubleTurret()
@@ -140,9 +184,7 @@ public class UpgradeSystem : MonoBehaviour
         else if (score.gearValue >= 30)
         {
             score.gearValue -= 30;
-            turretObject2.SetActive(true);
-
-            nTurretButton.interactable = false;
+            doubleTur = true;
         }
     }
 }

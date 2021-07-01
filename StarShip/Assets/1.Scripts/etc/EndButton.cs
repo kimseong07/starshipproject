@@ -7,6 +7,12 @@ using UnityEngine.SceneManagement;
 
 public class EndButton : MonoBehaviour
 {
+    DataController dataController;
+
+    private void Start()
+    {
+        dataController = FindObjectOfType<DataController>();
+    }
     public void Retry()
     {
         SceneManager.LoadScene("MainScene");
@@ -14,6 +20,7 @@ public class EndButton : MonoBehaviour
 
     public void End()
     {
+        dataController.SaveGameData();
         Application.Quit();
     }
 }

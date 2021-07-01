@@ -17,12 +17,17 @@ public class Shooter : MonoBehaviour
 
     private AudioSource audioSource;
 
+    DataController dataController;
+
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        dataController = FindObjectOfType<DataController>();
 
         bulletprefabs = new string[] { "BulletPlayer" };
         delay = 0;
+
+        Cdelay = dataController.gameData._cdelay;
     }
     void Update()
     {
@@ -38,6 +43,8 @@ public class Shooter : MonoBehaviour
                 bullet.transform.rotation = pos.transform.rotation;
 
                 delay = Cdelay;
+
+                dataController.gameData._cdelay = Cdelay;
             }
         }
 

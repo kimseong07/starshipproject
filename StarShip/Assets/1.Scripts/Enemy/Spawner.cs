@@ -15,10 +15,18 @@ public class Spawner : MonoBehaviour
 
     public ObjectManager objectManager;
 
+    DataController dataController;
+
     private void Awake()
     {
+        dataController = FindObjectOfType<DataController>();
         enemyObj = new string[] { "EnemyL" };
         spawnPoints = GameObject.Find("Spawner").GetComponentsInChildren<Transform>();
+    }
+
+    private void Start()
+    {
+        maxEnemy = dataController.gameData._enemyValue;
     }
 
     private void Update()
@@ -27,6 +35,7 @@ public class Spawner : MonoBehaviour
 
         enemyCount = (int)GameObject.FindGameObjectsWithTag("Enemy").Length;
 
+        dataController.gameData._enemyValue = maxEnemy;
         if (spawnPoints.Length > 0)
         {
             if (enemyCount < maxEnemy)
