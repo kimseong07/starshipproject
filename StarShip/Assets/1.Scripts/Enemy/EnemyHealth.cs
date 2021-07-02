@@ -36,6 +36,8 @@ public class EnemyHealth : MonoBehaviour
     public bool bPlayerInSightRange;
 
     public GameObject explosionEffect;
+    public GameObject explosionEffect2;
+    public GameObject explosionEffect3;
 
     private float delay = 1.5f;
 
@@ -149,7 +151,24 @@ public class EnemyHealth : MonoBehaviour
 
         state = State.Idle;
 
-        Instantiate(explosionEffect, transform);
+        int random = Random.Range(0, 2);
+
+        switch (random)
+        {
+            case 0:
+                Instantiate(explosionEffect, transform);
+                break;
+            case 1:
+                Instantiate(explosionEffect2, transform);
+                break;
+            case 2:
+                Instantiate(explosionEffect3, transform);
+                break;
+            default:
+                break;
+        }
+
+        
 
         StartCoroutine(setTime());
 

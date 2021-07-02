@@ -20,7 +20,7 @@ public class Spawner : MonoBehaviour
     private void Awake()
     {
         dataController = FindObjectOfType<DataController>();
-        enemyObj = new string[] { "EnemyL" };
+        enemyObj = new string[] { "EnemyL" , "EnemyR"};
         spawnPoints = GameObject.Find("Spawner").GetComponentsInChildren<Transform>();
     }
 
@@ -43,6 +43,9 @@ public class Spawner : MonoBehaviour
                 {
                     GameObject enemy = objectManager.MakeObj(enemyObj[0]);
                     enemy.transform.position = spawnPoints[idx].position;
+
+                    GameObject enemy2 = objectManager.MakeObj(enemyObj[1]);
+                    enemy2.transform.position = spawnPoints[idx].position;
 
                     delay = 1f;
                 }

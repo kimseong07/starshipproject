@@ -5,11 +5,13 @@ using UnityEngine;
 public class ObjectManager : MonoBehaviour
 {
     public GameObject enemyPrefab;
+    public GameObject enemy2Prefab;
     public GameObject bulletEPrefab;
     public GameObject bulletPPrefab;
     public GameObject gearPrefab;
 
     GameObject[] enemyL;
+    GameObject[] enemyR;
 
     GameObject[] bulletEnemy;
     GameObject[] bulletPlayer;
@@ -22,6 +24,7 @@ public class ObjectManager : MonoBehaviour
     private void Awake()
     {
         enemyL = new GameObject[30];
+        enemyR = new GameObject[20];
 
         bulletEnemy = new GameObject[50];
         bulletPlayer = new GameObject[50];
@@ -37,6 +40,12 @@ public class ObjectManager : MonoBehaviour
         {
             enemyL[index] = Instantiate(enemyPrefab);
             enemyL[index].SetActive(false);
+        }
+        
+        for(int index = 0; index < enemyR.Length; index++)
+        {
+            enemyR[index] = Instantiate(enemy2Prefab);
+            enemyR[index].SetActive(false);
         }
 
         for (int index = 0; index < bulletEnemy.Length; index++)
@@ -66,6 +75,9 @@ public class ObjectManager : MonoBehaviour
                 targetPool = enemyL;
                 break;
 
+            case "EnemyR":
+                targetPool = enemyR;
+                break;
             case "BulletEnemy":
                 targetPool = bulletEnemy;
                 break;
